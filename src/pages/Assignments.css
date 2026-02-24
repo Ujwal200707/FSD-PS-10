@@ -1,0 +1,305 @@
+.assignments-page {
+  min-height: 100vh;
+  background: #f8fafc;
+  padding: 24px;
+}
+
+.assignments-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin-bottom: 16px;
+}
+
+.assignments-header h1 {
+  margin: 0;
+  color: #111827;
+}
+
+.assignments-header p {
+  margin: 4px 0 0;
+  color: #6b7280;
+}
+
+.panel {
+  background: #fff;
+  border: 1px solid #e5e7eb;
+  border-radius: 12px;
+  padding: 16px;
+  margin-bottom: 16px;
+}
+
+.alert {
+  padding: 12px 14px;
+  border-radius: 10px;
+  margin-bottom: 12px;
+}
+
+.alert-danger {
+  background: #fee2e2;
+  color: #991b1b;
+  border-left: 4px solid #dc2626;
+}
+
+.alert-success {
+  background: #dcfce7;
+  color: #166534;
+  border-left: 4px solid #16a34a;
+}
+
+.alert-info {
+  background: #dbeafe;
+  color: #1e40af;
+  border-left: 4px solid #3b82f6;
+}
+
+.file-info {
+  font-size: 12px;
+  opacity: 0.8;
+}
+
+.file-attachment {
+  font-size: 12px;
+  color: #6b7280;
+  margin: 4px 0 0;
+}
+
+.filter-bar {
+  display: grid;
+  grid-template-columns: 1fr 220px;
+  gap: 10px;
+}
+
+.search-wrap {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.input {
+  width: 100%;
+  border: 1px solid #d1d5db;
+  border-radius: 10px;
+  padding: 10px 12px;
+  background: #fff;
+}
+
+.input:focus {
+  outline: 2px solid rgba(99, 102, 241, 0.2);
+  border-color: #6366f1;
+}
+
+.textarea {
+  min-height: 100px;
+  resize: vertical;
+}
+
+.form-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px;
+}
+
+.form-grid .full {
+  grid-column: 1 / -1;
+}
+
+.assignment-list {
+  display: grid;
+  gap: 12px;
+}
+
+.assignment-card h3 {
+  margin: 0;
+  color: #111827;
+}
+
+.card-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.status {
+  border-radius: 999px;
+  padding: 6px 10px;
+  font-size: 12px;
+  display: inline-flex;
+  gap: 6px;
+  align-items: center;
+}
+
+.status.active {
+  background: #ecfdf5;
+  color: #065f46;
+}
+
+.status.overdue {
+  background: #fef2f2;
+  color: #991b1b;
+}
+
+.subline {
+  margin: 8px 0;
+  color: #4b5563;
+  display: inline-flex;
+  gap: 8px;
+  align-items: center;
+}
+
+.desc {
+  margin: 8px 0 12px;
+  color: #6b7280;
+}
+
+.card-meta {
+  display: flex;
+  gap: 16px;
+  color: #6b7280;
+  font-size: 14px;
+  margin-bottom: 10px;
+  flex-wrap: wrap;
+}
+
+.row-actions {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.btn {
+  border: none;
+  border-radius: 10px;
+  padding: 9px 12px;
+  cursor: pointer;
+  font-weight: 600;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.btn-primary {
+  background: #4f46e5;
+  color: #fff;
+}
+
+.btn-primary:hover {
+  background: #4338ca;
+}
+
+.btn-outline {
+  background: #eef2ff;
+  color: #3730a3;
+}
+
+.btn-outline:hover {
+  background: #e0e7ff;
+}
+
+.btn-muted {
+  background: #f3f4f6;
+  color: #111827;
+}
+
+.submitted-pill {
+  background: #ecfdf5;
+  color: #065f46;
+  border-radius: 999px;
+  padding: 7px 10px;
+  display: inline-flex;
+  gap: 6px;
+  align-items: center;
+  font-weight: 600;
+  font-size: 13px;
+}
+
+.submission-list {
+  display: grid;
+  gap: 10px;
+}
+
+.submission-row {
+  border: 1px solid #e5e7eb;
+  border-radius: 10px;
+  padding: 10px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 10px;
+}
+
+.submission-controls {
+  min-width: 280px;
+}
+
+.grade-form-inline {
+  display: grid;
+  grid-template-columns: 80px 1fr auto;
+  gap: 8px;
+}
+
+.empty-state {
+  text-align: center;
+}
+
+.empty-icon {
+  font-size: 32px;
+  color: #9ca3af;
+}
+
+.muted {
+  margin: 2px 0;
+  color: #6b7280;
+}
+
+.loading-state {
+  min-height: 300px;
+  display: grid;
+  place-items: center;
+}
+
+.spinner {
+  width: 36px;
+  height: 36px;
+  border: 3px solid #e5e7eb;
+  border-top-color: #4f46e5;
+  border-radius: 50%;
+  animation: spin 0.9s linear infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@media (max-width: 768px) {
+  .assignments-page {
+    padding: 16px;
+  }
+
+  .filter-bar {
+    grid-template-columns: 1fr;
+  }
+
+  .form-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .submission-row {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .submission-controls {
+    min-width: auto;
+  }
+
+  .grade-form-inline {
+    grid-template-columns: 1fr;
+  }
+}

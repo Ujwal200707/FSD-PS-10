@@ -1,0 +1,398 @@
+/* Administrative Dashboard Styles */
+
+.admin-dashboard {
+  padding: 24px;
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+.admin-dashboard .dashboard-header {
+  margin-bottom: 32px;
+}
+
+.admin-dashboard .dashboard-header h1 {
+  font-size: 2rem;
+  font-weight: 700;
+  margin: 0 0 8px 0;
+  color: #1f2937;
+}
+
+.admin-dashboard .dashboard-header p {
+  color: #6b7280;
+  margin: 0;
+  font-size: 16px;
+}
+
+.admin-dashboard .stats-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 16px;
+  margin-bottom: 32px;
+}
+
+.admin-dashboard .stat-card {
+  background: #fff;
+  padding: 24px;
+  border-radius: 12px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  transition: all 0.3s ease;
+}
+
+.admin-dashboard .stat-card:hover {
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.admin-dashboard .stat-icon {
+  width: 56px;
+  height: 56px;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  font-size: 24px;
+}
+
+.admin-dashboard .stat-icon.users {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+}
+
+.admin-dashboard .stat-icon.courses {
+  background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+}
+
+.admin-dashboard .stat-icon.enrollments {
+  background: linear-gradient(135deg, #f59e0b 0%, #f97316 100%);
+}
+
+.admin-dashboard .stat-icon.instructors {
+  background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%);
+}
+
+.admin-dashboard .section {
+  background: #fff;
+  padding: 24px;
+  border-radius: 12px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  margin-bottom: 32px;
+}
+
+.admin-dashboard .section-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 24px;
+}
+
+.admin-dashboard .section-header h2 {
+  font-size: 18px;
+  font-weight: 700;
+  margin: 0;
+  color: #1f2937;
+}
+
+.admin-dashboard .btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 16px;
+  border-radius: 8px;
+  border: none;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.admin-dashboard .btn-primary {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: #fff;
+}
+
+.admin-dashboard .btn-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);
+}
+
+.admin-dashboard .filters-row {
+  display: flex;
+  gap: 12px;
+  margin-bottom: 24px;
+  flex-wrap: wrap;
+}
+
+.admin-dashboard .search-box {
+  flex: 1;
+  min-width: 200px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: #f9fafb;
+  padding: 8px 12px;
+  border-radius: 8px;
+  border: 1px solid #e5e7eb;
+}
+
+.admin-dashboard .search-box input {
+  flex: 1;
+  border: none;
+  background: transparent;
+  outline: none;
+  font-size: 14px;
+  color: #1f2937;
+}
+
+.admin-dashboard .search-box input::placeholder {
+  color: #9ca3af;
+}
+
+.admin-dashboard .filter-group {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.admin-dashboard .filter-group label {
+  font-size: 12px;
+  font-weight: 600;
+  color: #6b7280;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.admin-dashboard .filter-group select {
+  padding: 8px 12px;
+  border-radius: 8px;
+  border: 1px solid #e5e7eb;
+  font-size: 14px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.admin-dashboard .filter-group select:focus {
+  outline: none;
+  border-color: #667eea;
+  box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+}
+
+.admin-dashboard .table-container {
+  overflow-x: auto;
+}
+
+.admin-dashboard .data-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 14px;
+}
+
+.admin-dashboard .data-table thead tr {
+  border-bottom: 2px solid #e5e7eb;
+}
+
+.admin-dashboard .data-table th {
+  text-align: left;
+  padding: 12px;
+  font-weight: 600;
+  color: #6b7280;
+  background: #f9fafb;
+}
+
+.admin-dashboard .data-table tbody tr {
+  border-bottom: 1px solid #e5e7eb;
+  transition: background-color 0.2s ease;
+}
+
+.admin-dashboard .data-table tbody tr:hover {
+  background-color: #f9fafb;
+}
+
+.admin-dashboard .data-table td {
+  padding: 12px;
+  color: #1f2937;
+}
+
+.admin-dashboard .badge {
+  display: inline-block;
+  padding: 4px 8px;
+  border-radius: 4px;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.admin-dashboard .badge-admin {
+  background: #fee2e2;
+  color: #7f1d1d;
+}
+
+.admin-dashboard .badge-teacher {
+  background: #dbeafe;
+  color: #0c2d6b;
+}
+
+.admin-dashboard .badge-student {
+  background: #dcfce7;
+  color: #15803d;
+}
+
+.admin-dashboard .badge-content {
+  background: #fef3c7;
+  color: #92400e;
+}
+
+.admin-dashboard .status-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 4px 8px;
+  border-radius: 4px;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.admin-dashboard .status-badge.active {
+  background: #dcfce7;
+  color: #15803d;
+}
+
+.admin-dashboard .status-badge.inactive {
+  background: #fee2e2;
+  color: #7f1d1d;
+}
+
+.admin-dashboard .actions-cell {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+
+.admin-dashboard .action-btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 16px;
+  transition: all 0.2s ease;
+  padding: 4px 8px;
+  border-radius: 4px;
+}
+
+.admin-dashboard .action-btn.edit {
+  color: #3b82f6;
+}
+
+.admin-dashboard .action-btn.edit:hover {
+  background: #dbeafe;
+}
+
+.admin-dashboard .action-btn.delete {
+  color: #ef4444;
+}
+
+.admin-dashboard .action-btn.delete:hover {
+  background: #fee2e2;
+}
+
+.admin-dashboard .action-btn.toggle {
+  color: #10b981;
+  font-size: 18px;
+}
+
+.admin-dashboard .action-btn.toggle:hover {
+  background: #dcfce7;
+}
+
+.admin-dashboard .report-container {
+  margin-top: 20px;
+}
+
+.admin-dashboard .report-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 16px;
+}
+
+.admin-dashboard .report-card {
+  background: #f9fafb;
+  padding: 16px;
+  border-radius: 8px;
+}
+
+.admin-dashboard .report-card h4 {
+  font-size: 14px;
+  font-weight: 600;
+  margin: 0 0 12px 0;
+  color: #1f2937;
+}
+
+.admin-dashboard .report-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.admin-dashboard .report-list li {
+  font-size: 14px;
+  padding: 6px 0;
+  color: #6b7280;
+}
+
+.admin-dashboard .report-list li strong {
+  color: #1f2937;
+  font-weight: 700;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .admin-dashboard {
+    padding: 16px;
+  }
+
+  .admin-dashboard .dashboard-header h1 {
+    font-size: 1.5rem;
+  }
+
+  .admin-dashboard .section-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
+  }
+
+  .admin-dashboard .filters-row {
+    flex-direction: column;
+  }
+
+  .admin-dashboard .search-box {
+    flex: none;
+    width: 100%;
+  }
+
+  .admin-dashboard .filter-group select {
+    width: 100%;
+  }
+
+  .admin-dashboard .data-table th,
+  .admin-dashboard .data-table td {
+    padding: 8px;
+    font-size: 12px;
+  }
+
+  .admin-dashboard .action-btn {
+    font-size: 14px;
+  }
+}
+
+@media (max-width: 480px) {
+  .admin-dashboard .stats-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .admin-dashboard .data-table {
+    font-size: 12px;
+  }
+
+  .admin-dashboard .data-table th,
+  .admin-dashboard .data-table td {
+    padding: 6px;
+  }
+}
