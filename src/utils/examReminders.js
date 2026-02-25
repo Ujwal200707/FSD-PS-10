@@ -24,6 +24,7 @@ export const createExamReminder = ({
   id = `reminder_${Date.now()}`,
   examId,
   studentId,
+  studentEmail,
   reminderDate,
   message = "",
   isActive = true,
@@ -32,6 +33,7 @@ export const createExamReminder = ({
   id,
   examId,
   studentId,
+  studentEmail,
   reminderDate,
   message,
   isActive,
@@ -159,6 +161,16 @@ export const autoCreateRemindersForExam = (exam, studentId) => {
   ];
 
   const createdReminders = [];
+  // Attempt to resolve student email for reminder payloads
+  let studentEmail = null;
+  try {
+    const { getRegisteredUsers } = require("./auth");
+    const users = getRegisteredUsers();
+    const user = users.find((u) => u.id === studentId);
+    studentEmail = user?.email || null;
+  } catch (e) {
+    // ignore if unable to resolve
+  }
 
   defaultReminders.forEach(({ daysBefore, message }) => {
     const reminderDate = new Date(examDate);
@@ -168,6 +180,7 @@ export const autoCreateRemindersForExam = (exam, studentId) => {
       const reminder = saveExamReminder({
         examId: exam.id,
         studentId,
+        studentEmail,
         reminderDate: reminderDate.toISOString(),
         message,
       });

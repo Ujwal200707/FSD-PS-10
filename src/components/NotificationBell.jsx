@@ -85,8 +85,8 @@ const NotificationBell = () => {
             overflow: "auto",
           }}
         >
-          <div style={{ padding: "12px", borderBottom: "1px solid #e5e7eb" }}>
-            <h4 style={{ margin: 0, fontSize: "14px", fontWeight: "600" }}>
+          <div style={{ padding: "12px", borderBottom: "1px solid #e5e7eb", background: "#fff" }}>
+            <h4 style={{ margin: 0, fontSize: "14px", fontWeight: "700", color: "#0f172a" }}>
               Notifications ({unreadCount} unread)
             </h4>
           </div>
@@ -99,26 +99,26 @@ const NotificationBell = () => {
                   onClick={() => handleMarkAsRead(notif.id)}
                   style={{
                     padding: "12px",
-                    borderBottom: "1px solid #f3f4f6",
+                    borderBottom: "1px solid #eef2ff",
                     cursor: "pointer",
-                    background: notif.read ? "transparent" : "#f9fafb",
+                    background: notif.read ? "#ffffff" : "#f8fafc",
                     transition: "background-color 0.2s ease",
                   }}
                   onMouseEnter={(e) => (e.currentTarget.style.backgroundColor = "#f3f4f6")}
                   onMouseLeave={(e) =>
-                    (e.currentTarget.style.backgroundColor = notif.read ? "transparent" : "#f9fafb")
+                    (e.currentTarget.style.backgroundColor = notif.read ? "#ffffff" : "#f8fafc")
                   }
                 >
                   <div style={{ display: "flex", gap: "8px", alignItems: "flex-start" }}>
                     <div style={{ marginTop: "2px" }}>{getIconForType(notif.type)}</div>
                     <div style={{ flex: 1 }}>
-                      <p style={{ margin: "0 0 4px 0", fontSize: "13px", fontWeight: "600" }}>
+                      <p style={{ margin: "0 0 6px 0", fontSize: "13px", fontWeight: "700", color: "#0f172a" }}>
                         {notif.title}
                       </p>
-                      <p style={{ margin: 0, fontSize: "12px", color: "#6b7280" }}>
+                      <p style={{ margin: 0, fontSize: "12px", color: "#475569", whiteSpace: "pre-wrap" }}>
                         {notif.message}
                       </p>
-                      <p style={{ margin: "4px 0 0 0", fontSize: "11px", color: "#9ca3af" }}>
+                      <p style={{ margin: "6px 0 0 0", fontSize: "11px", color: "#6b7280" }}>
                         {new Date(notif.timestamp).toLocaleDateString()}
                       </p>
                     </div>
@@ -128,7 +128,7 @@ const NotificationBell = () => {
                           width: "8px",
                           height: "8px",
                           borderRadius: "50%",
-                          background: "#3b82f6",
+                          background: "#2563eb",
                           flexShrink: 0,
                         }}
                       ></div>

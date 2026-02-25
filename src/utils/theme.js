@@ -4,35 +4,25 @@
 
 const THEME_KEY = "lms_theme";
 
+// Force the application to always use the light theme.
 export const getTheme = () => {
-  try {
-    const saved = localStorage.getItem(THEME_KEY);
-    if (saved) return saved;
-    
-    // Check system preference
-    if (window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches) {
-      return "dark";
-    }
-    return "light";
-  } catch {
-    return "light";
-  }
+  return "light";
 };
 
-export const setTheme = (theme) => {
+export const setTheme = (/* theme */) => {
   try {
-    localStorage.setItem(THEME_KEY, theme);
-    document.documentElement.setAttribute("data-theme", theme);
-    document.body.style.backgroundColor = theme === "dark" ? "#1f2937" : "#ffffff";
-    document.body.style.color = theme === "dark" ? "#f3f4f6" : "#1f2937";
+    // Persist light theme to localStorage for compatibility with existing code
+    localStorage.setItem(THEME_KEY, "light");
+    document.documentElement.setAttribute("data-theme", "light");
+    document.body.style.backgroundColor = "#ffffff";
+    document.body.style.color = "#1f2937";
   } catch {
     // Silently fail if localStorage unavailable
   }
 };
 
+// No-op toggle to keep UI hooks functional while ensuring light theme
 export const toggleTheme = () => {
-  const current = getTheme();
-  const next = current === "dark" ? "light" : "dark";
-  setTheme(next);
-  return next;
+  setTheme();
+  return "light";
 };

@@ -137,7 +137,10 @@
   margin: 0;
   font-size: 1.8rem;
   font-weight: 700;
-  color: #1f2937;
+  color: #0f172a !important;
+  opacity: 1 !important;
+  font-weight: 800;
+  text-shadow: none;
 }
 
 .stat-info p {
@@ -214,6 +217,9 @@
   font-size: 1.8rem;
   font-weight: 700;
   line-height: 1;
+  color: #ffffff !important;
+  opacity: 1 !important;
+  text-shadow: 0 2px 6px rgba(2,6,23,0.25);
 }
 
 .days-label {
@@ -380,6 +386,71 @@
   background: #c7d2fe;
 }
 
+/* Ensure all card surfaces are solid and separated from dark page background */
+.stat-card,
+.add-reminder-card,
+.empty-state,
+.exam-card,
+.reminder-card {
+  background: var(--card-bg, #ffffff) !important;
+  border: 1px solid rgba(15, 23, 42, 0.06);
+  box-shadow: 0 8px 24px rgba(2, 6, 23, 0.08);
+}
+
+/* Stronger text contrast for stats and card content */
+.stat-info h3 {
+  color: #0f172a;
+}
+.stat-info p {
+  color: #475569;
+}
+
+/* Page-scoped overrides to defeat dashboard/global color rules */
+.exam-reminders-page .stat-card .stat-info h3 {
+  color: #0f172a !important;
+  opacity: 1 !important;
+  font-weight: 900 !important;
+  text-shadow: none !important;
+}
+.exam-reminders-page .stat-card .stat-info p {
+  color: #475569 !important;
+  opacity: 1 !important;
+}
+.exam-reminders-page .stat-card {
+  background: #ffffff !important;
+  color: inherit !important;
+}
+.exam-reminders-page .stat-icon,
+.exam-reminders-page .stat-date-badge {
+  color: inherit !important;
+}
+
+.empty-state h3,
+.add-reminder-card h3,
+.exam-info h4 {
+  color: #0f172a;
+}
+
+.empty-state p,
+.reminder-message,
+.exam-info p {
+  color: #475569;
+}
+
+/* Make the header primary button clearly visible on the gradient */
+.reminders-header .btn-primary {
+  background: #2563eb;
+  color: #fff;
+  box-shadow: 0 6px 18px rgba(37, 99, 235, 0.18);
+  border-radius: 10px;
+}
+
+/* Ensure icons on badges remain visible */
+.reminder-date-badge,
+.stat-icon {
+  box-shadow: 0 4px 12px rgba(2,6,23,0.06);
+}
+
 /* Loading State */
 .loading-state {
   display: flex;
@@ -474,6 +545,32 @@
   outline: none;
   border-color: #667eea;
   box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+}
+
+/* Make placeholders and form text explicitly visible */
+.search-input::placeholder {
+  color: #9ca3af;
+  opacity: 1;
+}
+
+/* Ensure add-reminder card contents contrast with background */
+.add-reminder-card {
+  background: var(--card-bg, #ffffff);
+  color: var(--text-color, #1f2937);
+}
+
+.add-reminder-card label,
+.add-reminder-card h3 {
+  color: #1f2937;
+}
+
+/* Improve readability of reminder text */
+.reminder-content h4 {
+  color: #111827;
+}
+
+.reminder-message {
+  color: #374151;
 }
 
 /* Responsive Design */

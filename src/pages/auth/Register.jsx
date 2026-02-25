@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
-import Captcha from "../../components/Captcha";
 import "./Auth.css";
 import { ALL_ROLES } from "../../constants/roles";
 import {
@@ -18,9 +17,8 @@ function Register() {
     password: "",
     confirm: "",
     role: "",
-    captcha: "",
+    
   });
-  const [captchaCode, setCaptchaCode] = useState("");
   const [error, setError] = useState("");
   const [submitting, setSubmitting] = useState(false);
   const [success, setSuccess] = useState(false);
@@ -35,9 +33,7 @@ function Register() {
     const password = form.password;
     const confirm = form.confirm;
     const role = form.role;
-    const captcha = form.captcha.trim();
-
-    if (!email || !password || !confirm || !role || !captcha) {
+    if (!email || !password || !confirm || !role) {
       setError("All fields are required.");
       return;
     }
@@ -47,10 +43,6 @@ function Register() {
     }
     if (password !== confirm) {
       setError("Passwords do not match.");
-      return;
-    }
-    if (captcha !== captchaCode) {
-      setError("Captcha is incorrect.");
       return;
     }
 
@@ -168,16 +160,7 @@ function Register() {
                 </select>
               </div>
 
-              <div className="auth-field">
-                <label htmlFor="register-captcha">Captcha</label>
-                <Captcha onChange={setCaptchaCode} />
-                <input
-                  id="register-captcha"
-                  value={form.captcha}
-                  onChange={(e) => setField("captcha", e.target.value)}
-                  placeholder="Enter captcha"
-                />
-              </div>
+              
 
               <button className="auth-btn" type="submit" disabled={submitting}>
                 {submitting ? "Creating..." : "Create Account"}

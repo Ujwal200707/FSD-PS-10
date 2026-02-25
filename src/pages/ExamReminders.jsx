@@ -26,12 +26,14 @@ import {
   deleteExamReminder,
   toggleExamReminder,
 } from "@utils/examReminders";
+import { createNotification, addNotification } from "@utils/notifications";
 import "./ExamReminders.css";
 
 function ExamReminders() {
   const navigate = useNavigate();
   const currentUser = useMemo(() => getCurrentUser(), []);
   const studentId = currentUser?.id;
+  const studentEmail = currentUser?.email;
 
   const [reminders, setReminders] = useState([]);
   const [assignedExams, setAssignedExams] = useState([]);
@@ -41,6 +43,7 @@ function ExamReminders() {
     examId: "",
     reminderDate: "",
     message: "",
+    studentEmail: "",
   });
 
   // Load data
@@ -97,11 +100,30 @@ function ExamReminders() {
     const reminder = saveExamReminder({
       examId: newReminder.examId,
       studentId,
+      studentEmail: newReminder.studentEmail || studentEmail,
       reminderDate: new Date(newReminder.reminderDate).toISOString(),
       message: reminderMessage,
     });
 
     setReminders((prev) => [...prev, reminder]);
+    // Create an in-app notification for the created reminder and include student email
+    try {
+      const notifMessage = `Reminder set for ${exam?.title || "Exam"} on ${formatDate(
+        reminder.reminderDate
+      )} ${formatTime(reminder.reminderDate)}. Student email: ${studentEmail}`;
+
+      const notif = createNotification({
+        type: "announcement",
+        title: "Exam Reminder Created",
+        message: notifMessage,
+        actionUrl: exam ? `/secure-exam/${exam.id}` : null,
+        relatedTo: { reminderId: reminder.id, examId: reminder.examId, studentEmail },
+      });
+
+      addNotification(studentId, notif);
+    } catch (e) {
+      console.warn("Failed to create reminder notification:", e);
+    }
     setNewReminder({ examId: "", reminderDate: "", message: "" });
     setShowAddForm(false);
   };
@@ -241,6 +263,21 @@ function ExamReminders() {
                   }
                 />
               </div>
+              <div className="form-group">
+                <label>Student Email (optional)</label>
+                <input
+                  type="email"
+                  className="search-input"
+                  placeholder="Student email (defaults to your account email)"
+                  value={newReminder.studentEmail || studentEmail || ""}
+                  onChange={(e) =>
+                    setNewReminder((prev) => ({
+                      ...prev,
+                      studentEmail: e.target.value,
+                    }))
+                  }
+                />
+              </div>
               <div className="form-actions">
                 <button
                   className="btn btn-primary"
@@ -253,7 +290,7 @@ function ExamReminders() {
                   className="btn btn-secondary"
                   onClick={() => {
                     setShowAddForm(false);
-                    setNewReminder({ examId: "", reminderDate: "", message: "" });
+                    setNewReminder({ examId: "", reminderDate: "", message: "", studentEmail: "" });
                   }}
                 >
                   Cancel
