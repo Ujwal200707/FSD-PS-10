@@ -47,6 +47,7 @@ const CourseEdit = () => {
     level: "",
     price: "",
     thumbnail: "",
+    thumbnailImage: "",
     status: "Active"
   });
   const [modules, setModules] = useState([]);
@@ -79,7 +80,7 @@ const CourseEdit = () => {
     1: {
       id: 1,
       title: "React Fundamentals",
-      instructor: "Dr. Sarah Johnson",
+      instructor: "Dr. Saanvi Sharma",
       category: "Web Development",
       duration: "8 weeks",
       students: 1250,
@@ -93,7 +94,7 @@ const CourseEdit = () => {
     2: {
       id: 2,
       title: "Advanced Python Programming",
-      instructor: "Prof. Michael Chen",
+      instructor: "Prof. Arjun Kumar",
       category: "Programming",
       duration: "12 weeks",
       students: 890,
@@ -192,6 +193,7 @@ const CourseEdit = () => {
           level: normalizedCourseData.level,
           price: normalizedCourseData.price,
           thumbnail: normalizedCourseData.thumbnail,
+          thumbnailImage: normalizedCourseData.thumbnailImage || "",
           status: normalizedCourseData.status
         });
 
@@ -255,7 +257,8 @@ const CourseEdit = () => {
         duration: formData.duration,
         level: formData.level,
         price: formData.price,
-        thumbnail: formData.thumbnail,
+          thumbnail: formData.thumbnail,
+          thumbnailImage: formData.thumbnailImage,
         status: formData.status,
         modules: modules.map((module) => ({
           id: module.id,
@@ -799,6 +802,26 @@ const CourseEdit = () => {
                     }}
                     placeholder="e.g., 🎨 or 📊"
                   />
+                  <div style={{ marginTop: 8 }}>
+                    <label style={{ display: "block", fontSize: "0.9rem", marginBottom: 6 }}>Course image (optional)</label>
+                    <input
+                      type="file"
+                      accept="image/*"
+                      onChange={(e) => {
+                        const file = e.target.files && e.target.files[0];
+                        if (!file) return;
+                        const reader = new FileReader();
+                        reader.onload = (ev) => setFormData(prev => ({ ...prev, thumbnailImage: ev.target.result }));
+                        reader.readAsDataURL(file);
+                      }}
+                    />
+                    {formData.thumbnailImage && (
+                      <div style={{ display: "flex", alignItems: "center", gap: 8, marginTop: 8 }}>
+                        <img src={formData.thumbnailImage} alt="preview" style={{ width: 90, height: 68, objectFit: "cover", borderRadius: 6, border: "1px solid #e5e7eb" }} />
+                        <button className="btn btn-secondary" type="button" onClick={() => setFormData(prev => ({ ...prev, thumbnailImage: "" }))}>Remove</button>
+                      </div>
+                    )}
+                  </div>
                 </div>
               </div>
 
@@ -1300,7 +1323,11 @@ const CourseEdit = () => {
                   textAlign: "center"
                 }}>
                   <div style={{ fontSize: "3rem", marginBottom: "10px" }}>
-                    {formData.thumbnail || "📚"}
+                    {formData.thumbnailImage ? (
+                      <img src={formData.thumbnailImage} alt={formData.title} style={{ width: 96, height: 72, objectFit: "cover", borderRadius: 8 }} />
+                    ) : (
+                      formData.thumbnail || "📚"
+                    )}
                   </div>
                   <h4 style={{ fontSize: "1.1rem", fontWeight: "bold", marginBottom: "5px" }}>
                     {formData.title || "Course Title"}

@@ -174,7 +174,6 @@ const Settings = () => {
                     onChange={(event) => handleProfileChange("language", event.target.value)}
                   >
                     <option value="English">English</option>
-                    <option value="Hindi">Hindi</option>
                   </select>
                 </label>
               </div>

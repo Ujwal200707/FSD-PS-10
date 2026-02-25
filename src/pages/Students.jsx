@@ -28,8 +28,8 @@ const Students = () => {
   const mockStudents = [
     {
       id: 1,
-      name: "Alice Johnson",
-      email: "alice.johnson@email.com",
+      name: "Aarav Sharma",
+      email: "aarav.sharma@email.com",
       status: "Active",
       enrolledCourses: 5,
       joinDate: "2024-01-15",
@@ -38,8 +38,8 @@ const Students = () => {
     },
     {
       id: 2,
-      name: "Bob Smith",
-      email: "bob.smith@email.com",
+      name: "Isha Patel",
+      email: "isha.patel@email.com",
       status: "Active",
       enrolledCourses: 3,
       joinDate: "2024-01-20",
@@ -48,8 +48,8 @@ const Students = () => {
     },
     {
       id: 3,
-      name: "Carol Davis",
-      email: "carol.davis@email.com",
+      name: "Rohit Kumar",
+      email: "rohit.kumar@email.com",
       status: "Inactive",
       enrolledCourses: 2,
       joinDate: "2024-01-10",
@@ -58,8 +58,8 @@ const Students = () => {
     },
     {
       id: 4,
-      name: "David Wilson",
-      email: "david.wilson@email.com",
+      name: "Sneha Reddy",
+      email: "sneha.reddy@email.com",
       status: "Active",
       enrolledCourses: 7,
       joinDate: "2024-01-25",

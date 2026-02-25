@@ -129,7 +129,7 @@ function Home() {
         <div className="home-container nav-shell">
           <div className="brand-wrap">
             <div className="brand-mark">E</div>
-            <h1 className="brand-text">EduLMS</h1>
+            <h1 className="brand-text">EDULMS</h1>
           </div>
 
           <nav className="menu-links" aria-label="Main navigation">
@@ -157,7 +157,7 @@ function Home() {
         <div className="home-container hero-grid">
           <div className="hero-copy">
             <p className="hero-tag">Enterprise-ready learning platform</p>
-            <h2>Transform Online Education with EduLMS</h2>
+            <h2>Transform Online Education with EDULMS</h2>
             <p className="hero-subtitle">
               Deliver secure, scalable, and measurable learning experiences for institutions,
               corporate academies, and training organizations.
@@ -272,7 +272,7 @@ function Home() {
       <section id="cta" className="cta-section">
         <div className="home-container cta-box">
           <h3>Ready to Elevate Your Learning Experience?</h3>
-          <p>Launch secure, measurable, and engaging learning workflows with EduLMS.</p>
+          <p>Launch secure, measurable, and engaging learning workflows with EDULMS.</p>
           <div className="cta-actions">
             <Link to="/register" className="btn-main btn-primary-main">
               Create Account
@@ -289,7 +289,7 @@ function Home() {
           <div>
             <div className="brand-wrap footer-brand">
               <div className="brand-mark">E</div>
-              <h4 className="brand-text">EduLMS</h4>
+              <h4 className="brand-text">EDULMS</h4>
             </div>
             <p className="footer-copy">Professional LMS infrastructure for institutions and enterprise training.</p>
           </div>
@@ -318,7 +318,7 @@ function Home() {
         </div>
 
         <div className="home-container footer-bottom">
-          <p>© 2026 EduLMS. All rights reserved.</p>
+          <p>© 2026 EDULMS. All rights reserved.</p>
           <div className="footer-legal">
             <a href="#">Terms</a>
             <a href="#">Privacy</a>

@@ -28,8 +28,8 @@ export const initializeSampleData = () => {
   const sampleUsers = [
     {
       id: "u1",
-      email: "sarah.johnson@edulms.com",
-      name: "Dr. Sarah Johnson",
+      email: "saanvi.sharma@edulms.com",
+      name: "Dr. Saanvi Sharma",
       password: "password123",
       role: "teacher",
       status: "active",
@@ -38,8 +38,8 @@ export const initializeSampleData = () => {
     },
     {
       id: "u2",
-      email: "michael.chen@edulms.com",
-      name: "Prof. Michael Chen",
+      email: "arjun.kumar@edulms.com",
+      name: "Prof. Arjun Kumar",
       password: "password123",
       role: "teacher",
       status: "active",
@@ -48,8 +48,8 @@ export const initializeSampleData = () => {
     },
     {
       id: "u3",
-      email: "emma.davis@edulms.com",
-      name: "Emma Davis",
+      email: "priya.patel@edulms.com",
+      name: "Priya Patel",
       password: "password123",
       role: "content",
       status: "active",
@@ -58,8 +58,8 @@ export const initializeSampleData = () => {
     },
     {
       id: "u4",
-      email: "alice@edulms.com",
-      name: "Alice Johnson",
+      email: "sneha.rao@edulms.com",
+      name: "Sneha Rao",
       password: "password123",
       role: "student",
       status: "active",
@@ -67,8 +67,8 @@ export const initializeSampleData = () => {
     },
     {
       id: "u5",
-      email: "bob@edulms.com",
-      name: "Bob Smith",
+      email: "rahul.singh@edulms.com",
+      name: "Rahul Singh",
       password: "password123",
       role: "student",
       status: "active",
@@ -94,7 +94,7 @@ export const initializeSampleData = () => {
       id: "c1",
       title: "React Fundamentals",
       description: "Learn the basics of React.js and build modern web applications.",
-      instructor: "Dr. Sarah Johnson",
+      instructor: "Dr. Saanvi Sharma",
       instructorId: "u1",
       category: "Web Development",
       level: "Beginner",
@@ -116,7 +116,7 @@ export const initializeSampleData = () => {
       id: "c2",
       title: "Python for Data Science",
       description: "Master Python programming concepts for data analysis and visualization.",
-      instructor: "Prof. Michael Chen",
+      instructor: "Prof. Arjun Kumar",
       instructorId: "u2",
       category: "Data Science",
       level: "Intermediate",
@@ -138,7 +138,7 @@ export const initializeSampleData = () => {
       id: "c3",
       title: "UI/UX Design Principles",
       description: "Learn essential UI/UX design principles and create user-centered designs.",
-      instructor: "Dr. Sarah Johnson",
+      instructor: "Dr. Saanvi Sharma",
       instructorId: "u1",
       category: "Design",
       level: "Intermediate",
@@ -160,7 +160,7 @@ export const initializeSampleData = () => {
       id: "c4",
       title: "Web Development Bootcamp",
       description: "Comprehensive course covering HTML, CSS, JavaScript, and modern frameworks.",
-      instructor: "Prof. Michael Chen",
+      instructor: "Prof. Arjun Kumar",
       instructorId: "u2",
       category: "Web Development",
       level: "Beginner",
@@ -225,10 +225,10 @@ export const initializeSampleData = () => {
   sampleAssignments.forEach((assignment) => saveAssignment(assignment));
 
   // Enroll students in courses
-  enrollStudent("c1", "u4", "alice@edulms.com");
-  enrollStudent("c1", "u5", "bob@edulms.com");
-  enrollStudent("c2", "u4", "alice@edulms.com");
-  enrollStudent("c3", "u5", "bob@edulms.com");
+  enrollStudent("c1", "u4", "sneha.rao@edulms.com");
+  enrollStudent("c1", "u5", "rahul.singh@edulms.com");
+  enrollStudent("c2", "u4", "sneha.rao@edulms.com");
+  enrollStudent("c3", "u5", "rahul.singh@edulms.com");
 
   // Create sample notifications
   const sampleNotifications = [
@@ -242,13 +242,13 @@ export const initializeSampleData = () => {
       type: "assignment_due",
       title: "Assignment Due Soon",
       message: "Your React Component assignment is due in 7 days",
-      sender: "Dr. Sarah Johnson",
+      sender: "Dr. Saanvi Sharma",
     },
     {
       type: "course_update",
       title: "Course Updated",
       message: "React Fundamentals has new content this week",
-      sender: "Dr. Sarah Johnson",
+      sender: "Dr. Saanvi Sharma",
     },
   ];
 

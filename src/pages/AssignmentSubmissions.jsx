@@ -45,8 +45,8 @@ const AssignmentSubmissions = () => {
     {
       id: 1,
       assignmentId: 1,
-      studentName: "Alice Johnson",
-      studentEmail: "alice@email.com",
+      studentName: "Aarav Sharma",
+      studentEmail: "aarav.sharma@email.com",
       submittedAt: "2024-02-20",
       status: "submitted",
       grade: null,
@@ -62,8 +62,8 @@ const AssignmentSubmissions = () => {
     {
       id: 2,
       assignmentId: 1,
-      studentName: "Bob Smith",
-      studentEmail: "bob@email.com",
+      studentName: "Isha Patel",
+      studentEmail: "isha.patel@email.com",
       submittedAt: "2024-02-19",
       status: "graded",
       grade: "A",
@@ -78,8 +78,8 @@ const AssignmentSubmissions = () => {
     {
       id: 3,
       assignmentId: 1,
-      studentName: "Carol Davis",
-      studentEmail: "carol@email.com",
+      studentName: "Rohit Kumar",
+      studentEmail: "rohit.kumar@email.com",
       submittedAt: "2024-02-18",
       status: "graded",
       grade: "B+",
@@ -93,8 +93,8 @@ const AssignmentSubmissions = () => {
     {
       id: 4,
       assignmentId: 2,
-      studentName: "David Wilson",
-      studentEmail: "david@email.com",
+      studentName: "Sneha Reddy",
+      studentEmail: "sneha.reddy@email.com",
       submittedAt: "2024-02-21",
       status: "submitted",
       grade: null,

@@ -85,7 +85,7 @@ function Register() {
     <div className="auth-page">
       <section className="auth-left">
         <div className="auth-panel">
-          <h1>Join EduLMS</h1>
+          <h1>Join EDULMS</h1>
           <p>Create your account and start with a role-specific workspace.</p>
         </div>
       </section>

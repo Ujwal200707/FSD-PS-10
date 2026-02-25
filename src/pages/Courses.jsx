@@ -49,6 +49,7 @@ const Courses = () => {
     category: "",
     price: "Free",
     thumbnail: "📘",
+    thumbnailImage: "",
   });
 
   const resetForm = () => {
@@ -60,6 +61,7 @@ const Courses = () => {
       category: "",
       price: "Free",
       thumbnail: "📘",
+      thumbnailImage: "",
     });
     setEditingCourseId("");
   };
@@ -145,6 +147,7 @@ const Courses = () => {
       category: course.category || "",
       price: course.price || "Free",
       thumbnail: course.thumbnail || "📘",
+      thumbnailImage: course.thumbnailImage || "",
     });
     setShowCourseForm(true);
   };
@@ -164,6 +167,7 @@ const Courses = () => {
       category: courseForm.category,
       price: courseForm.price,
       thumbnail: courseForm.thumbnail,
+      thumbnailImage: courseForm.thumbnailImage,
       instructor: currentUser?.name || "Instructor",
       instructorId: currentUser?.id || "",
       rating: editingCourseId
@@ -286,6 +290,28 @@ const Courses = () => {
                 value={courseForm.thumbnail}
                 onChange={(e) => setCourseForm((p) => ({ ...p, thumbnail: e.target.value }))}
               />
+              <div style={{ display: "flex", flexDirection: "column", gap: 8 }}>
+                <label style={{ fontSize: "0.9rem", color: "#374151" }}>Course image (optional)</label>
+                <input
+                  type="file"
+                  accept="image/*"
+                  onChange={(e) => {
+                    const file = e.target.files && e.target.files[0];
+                    if (!file) return;
+                    const reader = new FileReader();
+                    reader.onload = (ev) => {
+                      setCourseForm((p) => ({ ...p, thumbnailImage: ev.target.result }));
+                    };
+                    reader.readAsDataURL(file);
+                  }}
+                />
+                {courseForm.thumbnailImage && (
+                  <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
+                    <img src={courseForm.thumbnailImage} alt="preview" style={{ width: 80, height: 60, objectFit: "cover", borderRadius: 6, border: "1px solid #e5e7eb" }} />
+                    <button className="btn btn-secondary" onClick={() => setCourseForm((p) => ({ ...p, thumbnailImage: "" }))} type="button">Remove</button>
+                  </div>
+                )}
+              </div>
               <textarea
                 className="search-input course-desc-input"
                 placeholder="Course description"
@@ -346,7 +372,13 @@ const Courses = () => {
             {filteredCourses.map((course) => (
               <div key={course.id} className="course-card">
                 <div className="course-thumbnail">
-                  <div className="thumbnail-content">{course.thumbnail || "📚"}</div>
+                  <div className="thumbnail-content">
+                    {course.thumbnailImage ? (
+                      <img src={course.thumbnailImage} alt={course.title} style={{ width: "100%", height: "100%", objectFit: "cover" }} />
+                    ) : (
+                      course.thumbnail || "📚"
+                    )}
+                  </div>
                   <span className="level-badge">{course.level}</span>
                 </div>
 

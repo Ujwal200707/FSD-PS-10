@@ -255,7 +255,7 @@ function ContentCreatorDashboard() {
             <div className="collaboration-list">
               <div className="collaboration-item">
                 <div className="collaboration-info">
-                  <h5>Dr. Sarah Johnson</h5>
+                  <h5>Dr. Saanvi Sharma</h5>
                   <p>Requesting content review for "Advanced React"</p>
                   <small>Requested 2 hours ago</small>
                 </div>
@@ -267,7 +267,7 @@ function ContentCreatorDashboard() {
 
               <div className="collaboration-item">
                 <div className="collaboration-info">
-                  <h5>Prof. Michael Chen</h5>
+                  <h5>Prof. Arjun Kumar</h5>
                   <p>Asking for Python course material update</p>
                   <small>Requested 1 day ago</small>
                 </div>

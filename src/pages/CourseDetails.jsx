@@ -28,7 +28,7 @@ const CourseDetails = () => {
     1: {
       id: 1,
       title: "React Fundamentals",
-      instructor: "Dr. Sarah Johnson",
+      instructor: "Dr. Saanvi Sharma",
       category: "Web Development",
       duration: "8 weeks",
       students: 1250,
@@ -90,7 +90,7 @@ const CourseDetails = () => {
     2: {
       id: 2,
       title: "Advanced Python Programming",
-      instructor: "Prof. Michael Chen",
+      instructor: "Prof. Arjun Kumar",
       category: "Programming",
       duration: "12 weeks",
       students: 890,
@@ -285,7 +285,11 @@ const CourseDetails = () => {
                 fontSize: "4rem",
                 flexShrink: 0
               }}>
-                {course.thumbnail}
+                {course.thumbnailImage ? (
+                  <img src={course.thumbnailImage} alt={course.title} style={{ width: "100%", height: "100%", objectFit: "cover", borderRadius: "12px" }} />
+                ) : (
+                  course.thumbnail
+                )}
               </div>
 
               <div style={{ flex: 1 }}>

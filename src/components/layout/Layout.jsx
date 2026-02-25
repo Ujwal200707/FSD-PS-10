@@ -71,7 +71,7 @@ const Layout = ({ children, pageTitle }) => {
   return (
     <div className="layout">
       <aside className="layout-sidebar">
-        <h2 className="layout-brand">EduLMS</h2>
+        <h2 className="layout-brand">EDULMS</h2>
         <p className="layout-user">{role.toUpperCase()} • {email}</p>
 
         <nav className="layout-nav">

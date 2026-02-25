@@ -163,7 +163,7 @@ export const getPlatformSettings = () => {
     const settings = JSON.parse(localStorage.getItem(STORAGE_KEYS.PLATFORM_SETTINGS) || "{}");
     if (Object.keys(settings).length === 0) {
       return {
-        platformName: "EduLMS",
+        platformName: "EDULMS",
         platformUrl: "https://edulms.local",
         supportEmail: "support@edulms.local",
         timezone: "UTC",

@@ -93,7 +93,7 @@ function ForgotPassword() {
           fontWeight: "bold",
           color: "#ffd700"
         }}>
-          EduLMS
+          EDULMS
         </div>
         <div style={{ textAlign: "center", maxWidth: "400px", zIndex: 2 }}>
           <h1 style={{ fontSize: "2.5rem", fontWeight: "bold", marginBottom: "20px" }}>
