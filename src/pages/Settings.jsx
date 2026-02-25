@@ -3,7 +3,6 @@ import Layout from "@components/layout/Layout";
 import { ROLES } from "../constants/roles";
 import { getCurrentUser, normalizeRole } from "../utils/auth";
 import {
-  applyThemePreference,
   getPlatformSettingsData,
   getUserSettings,
   updatePlatformSettingsData,
@@ -29,7 +28,6 @@ const Settings = () => {
     inAppNotifications: true,
     emailNotifications: true,
     assignmentReminders: true,
-    darkMode: false,
   });
 
   const [platformForm, setPlatformForm] = useState({
@@ -102,7 +100,6 @@ const Settings = () => {
     if (!currentUser?.id) return;
 
     updateUserSettings(currentUser.id, { preferences: preferencesForm });
-    applyThemePreference(preferencesForm.darkMode);
 
     setPreferencesMessage("Preferences updated successfully.");
     setTimeout(() => setPreferencesMessage(""), 2500);
@@ -223,16 +220,7 @@ const Settings = () => {
                 <span>Assignment reminder alerts</span>
               </label>
 
-              <label>
-                Theme
-                <select
-                  value={preferencesForm.darkMode ? "dark" : "light"}
-                  onChange={(event) => handlePreferenceChange("darkMode", event.target.value === "dark")}
-                >
-                  <option value="light">Light</option>
-                  <option value="dark">Dark</option>
-                </select>
-              </label>
+              
 
               <div className="settings-actions">
                 <button type="submit" className="settings-btn-primary">Save Preferences</button>
