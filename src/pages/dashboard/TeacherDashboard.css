@@ -605,6 +605,11 @@
     width: 100%;
   }
 
+  /* Hide any submit buttons inside teacher dashboard to prevent student actions */
+  .teacher-dashboard .btn-submit {
+    display: none !important;
+  }
+
   .graded-item {
     gap: 12px;
   }

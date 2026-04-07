@@ -1,27 +1,29 @@
 import React, { useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
-import axios from "axios";
+import { login } from "../../services/auth";
 import Captcha from "../../components/Captcha";
 import "./Auth.css";
 import { ALL_ROLES } from "../../constants/roles";
-import { getRegisteredUsers, getRoleHome, normalizeRole, setCurrentUser } from "../../utils/auth";
-import { getAllUsers } from "../../utils/admin";
+import { getRoleHome, setCurrentUser } from "../../utils/auth";
 
 const roles = ALL_ROLES;
 
 function Login() {
   const navigate = useNavigate();
+
   const [form, setForm] = useState({
     email: "",
     password: "",
     role: "",
     captcha: "",
   });
+
   const [captchaCode, setCaptchaCode] = useState("");
   const [error, setError] = useState("");
   const [submitting, setSubmitting] = useState(false);
 
-  const setField = (key, value) => setForm((prev) => ({ ...prev, [key]: value }));
+  const setField = (key, value) =>
+    setForm((prev) => ({ ...prev, [key]: value }));
 
   const onSubmit = async (e) => {
     e.preventDefault();
@@ -32,62 +34,53 @@ function Login() {
     const role = form.role;
     const captcha = form.captcha.trim();
 
+    // validation
     if (!email || !password || !role || !captcha) {
       setError("All fields are required.");
       return;
     }
+
     if (captcha !== captchaCode) {
       setError("Captcha is incorrect.");
       return;
     }
 
     setSubmitting(true);
+
     try {
-      // Try API login first
-      const res = await axios.post(
-        "/api/auth/login",
-        { email, password, role },
-        { withCredentials: true }
-      );
-      const user = res?.data?.user;
-      if (!user) throw new Error("Invalid response");
-      setCurrentUser(user);
-      navigate(getRoleHome(user.role), { replace: true });
-    } catch {
-// Fallback: Check both registeredUsers and lms_users (from admin/bootstrap)
-      const registeredUsers = getRegisteredUsers();
-      const adminUsers = getAllUsers();
-      
-      // First check registered users
-      let userByEmailAndRole = registeredUsers.find(
-        (u) => u.email === email && normalizeRole(u.role) === role
-      );
-      
-      // If not found in registered, check admin/users (sample users)
-      if (!userByEmailAndRole) {
-        userByEmailAndRole = adminUsers.find(
-          (u) => u.email === email && normalizeRole(u.role) === role
-        );
-      }
-
-      if (!userByEmailAndRole) {
-        setError("User not found. Please register first.");
-        return;
-      }
-
-      if (userByEmailAndRole.password !== password) {
-        setError("Invalid password.");
-        return;
-      }
-
-      // Include name when setting current user
-      setCurrentUser({
-        id: userByEmailAndRole.id,
-        email: userByEmailAndRole.email,
-        name: userByEmailAndRole.name || "",
-        role: userByEmailAndRole.role,
+      // ✅ CORRECT LOGIN (email-based)
+      const res = await login({
+        email,
+        password
       });
-      navigate(getRoleHome(userByEmailAndRole.role), { replace: true });
+
+      const user = res?.user || res;
+
+      if (!user) throw new Error("Invalid response");
+
+      // Determine primary role (backend returns `roles` array)
+      const primaryRole = user.role
+        || (Array.isArray(user.roles) && user.roles[0])
+        || (user.roles && Object.values(user.roles)[0])
+        || form.role
+        || 'student';
+
+      // normalize and attach for UI convenience
+      user.role = String(primaryRole).toLowerCase();
+
+      setCurrentUser(user);
+
+      // role-based redirect
+      navigate(getRoleHome(user.role), { replace: true });
+
+    } catch (err) {
+      console.error(err);
+
+      if (err.response?.data) {
+        setError(err.response.data);
+      } else {
+        setError("Login failed. Try again.");
+      }
     } finally {
       setSubmitting(false);
     }
@@ -105,35 +98,38 @@ function Login() {
       <section className="auth-right">
         <form className="auth-card" onSubmit={onSubmit} noValidate>
           <h2>Sign In</h2>
-          {error ? <div className="auth-error" role="alert">{error}</div> : null}
 
+          {error && (
+            <div className="auth-error" role="alert">
+              {error}
+            </div>
+          )}
+
+          {/* EMAIL */}
           <div className="auth-field">
-            <label htmlFor="login-email">Email</label>
+            <label>Email</label>
             <input
-              id="login-email"
               type="email"
               value={form.email}
               onChange={(e) => setField("email", e.target.value)}
               placeholder="you@example.com"
-              autoComplete="email"
             />
           </div>
 
+          {/* PASSWORD */}
           <div className="auth-field">
-            <label htmlFor="login-password">Password</label>
+            <label>Password</label>
             <input
-              id="login-password"
               type="password"
               value={form.password}
               onChange={(e) => setField("password", e.target.value)}
-              autoComplete="current-password"
             />
           </div>
 
+          {/* ROLE */}
           <div className="auth-field">
-            <label htmlFor="login-role">Role</label>
+            <label>Role</label>
             <select
-              id="login-role"
               value={form.role}
               onChange={(e) => setField("role", e.target.value)}
             >
@@ -146,17 +142,18 @@ function Login() {
             </select>
           </div>
 
+          {/* CAPTCHA */}
           <div className="auth-field">
-            <label htmlFor="login-captcha">Captcha</label>
+            <label>Captcha</label>
             <Captcha onChange={setCaptchaCode} />
             <input
-              id="login-captcha"
               value={form.captcha}
               onChange={(e) => setField("captcha", e.target.value)}
               placeholder="Enter captcha"
             />
           </div>
 
+          {/* BUTTON */}
           <button className="auth-btn" type="submit" disabled={submitting}>
             {submitting ? "Signing In..." : "Sign In"}
           </button>

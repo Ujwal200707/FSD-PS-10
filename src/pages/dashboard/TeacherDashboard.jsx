@@ -307,123 +307,27 @@ function TeacherDashboard() {
             )}
           </section>
 
-          {/* Pending Submissions vs Grading Interface */}
-          <div className="grading-grid">
-            {/* Pending Submissions List */}
-            <section className="dashboard-section">
-              <div className="section-header">
-                <h3>Pending Submissions ({pendingSubmissions.length})</h3>
-                <button
-                  className="btn-link"
-                  onClick={() => navigate("/assignments")}
-                >
-                  Grade Assignments →
-                </button>
-              </div>
-
-              {pendingSubmissions.length === 0 ? (
-                <div className="empty-state-compact">
-                  <FaCheckCircle className="empty-icon-small" style={{ color: "#10b981" }} />
-                  <p>All submissions graded!</p>
-                </div>
-              ) : (
-                <div className="submissions-list">
-                  {pendingSubmissions.map((submission) => (
-                    <div
-                      key={submission.id}
-                      className={`submission-item ${
-                        selectedSubmission?.id === submission.id ? "selected" : ""
-                      }`}
-                      onClick={() => handleSubmissionSelect(submission)}
-                    >
-                      <div className="submission-info">
-                        <h5 className="student-name">{submission.studentName}</h5>
-                        <p className="assignment-name">{submission.assignmentTitle}</p>
-                        <p className="course-name">{submission.courseName}</p>
-                        <p className="submit-date">Submitted: {submission.submittedDate}</p>
-                      </div>
-                      <div className="submission-action">
-                        <FaEye size={16} />
-                      </div>
-                    </div>
-                  ))}
-                </div>
-              )}
-            </section>
-
-            {/* Grading Interface */}
-            <section className="dashboard-section">
-              <div className="section-header">
-                <h3>Grading Panel</h3>
-              </div>
-
-              {!selectedSubmission ? (
-                <div className="empty-state-compact">
-                  <FaClipboardList className="empty-icon-small" />
-                  <p>Select a submission to grade</p>
-                </div>
-              ) : (
-                <div className="grading-form">
-                  <div className="form-section">
-                    <h4>Submission Details</h4>
-                    <div className="detail-row">
-                      <span className="label">Student:</span>
-                      <span className="value">{selectedSubmission.studentName}</span>
-                    </div>
-                    <div className="detail-row">
-                      <span className="label">Assignment:</span>
-                      <span className="value">{selectedSubmission.assignmentTitle}</span>
-                    </div>
-                    <div className="detail-row">
-                      <span className="label">Course:</span>
-                      <span className="value">{selectedSubmission.courseName}</span>
-                    </div>
-                    <div className="detail-row">
-                      <span className="label">Submitted:</span>
-                      <span className="value">{selectedSubmission.submittedDate}</span>
-                    </div>
+          {/* Submissions Overview (read-only counts per course) */}
+          <section className="dashboard-section full-width">
+            <div className="section-header">
+              <h3>Submissions Overview</h3>
+            </div>
+            <div className="submissions-overview-grid">
+              {instructorCourses.map((course) => {
+                const assignments = getAssignments().filter((a) => a.courseId === course.id);
+                const courseSubmissionCount = getSubmissions().filter((s) =>
+                  assignments.some((a) => a.id === s.assignmentId)
+                ).length;
+                return (
+                  <div key={course.id} className="submission-count-card">
+                    <h4>{course.title}</h4>
+                    <div className="submission-count">{courseSubmissionCount} students submitted</div>
+                    <div className="course-meta">{assignments.length} assignments</div>
                   </div>
-
-                  <div className="form-group">
-                    <label htmlFor="grade">Grade (0-100):</label>
-                    <input
-                      id="grade"
-                      type="number"
-                      min="0"
-                      max="100"
-                      value={gradingForm.grade}
-                      onChange={(e) =>
-                        setGradingForm({ ...gradingForm, grade: e.target.value })
-                      }
-                      placeholder="Enter grade"
-                      className="form-input"
-                    />
-                  </div>
-
-                  <div className="form-group">
-                    <label htmlFor="feedback">Feedback:</label>
-                    <textarea
-                      id="feedback"
-                      value={gradingForm.feedback}
-                      onChange={(e) =>
-                        setGradingForm({ ...gradingForm, feedback: e.target.value })
-                      }
-                      placeholder="Provide constructive feedback..."
-                      className="form-textarea"
-                      rows="5"
-                    />
-                  </div>
-
-                  <button
-                    className="btn btn-submit"
-                    onClick={handleGradeSubmission}
-                  >
-                    <FaCheckCircle /> Submit Grade
-                  </button>
-                </div>
-              )}
-            </section>
-          </div>
+                );
+              })}
+            </div>
+          </section>
 
           {/* Recently Graded Section */}
           {gradedSubmissions.length > 0 && (

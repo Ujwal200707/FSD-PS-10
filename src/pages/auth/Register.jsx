@@ -4,28 +4,30 @@ import "./Auth.css";
 import { ALL_ROLES } from "../../constants/roles";
 import {
   getRegisteredUsers,
-  normalizeRole,
   setRegisteredUsers,
 } from "../../utils/auth";
+import { register as apiRegister } from "../../services/auth.js";
 
 const roles = ALL_ROLES;
 
 function Register() {
   const navigate = useNavigate();
+
   const [form, setForm] = useState({
     email: "",
     password: "",
     confirm: "",
     role: "",
-    
   });
+
   const [error, setError] = useState("");
   const [submitting, setSubmitting] = useState(false);
   const [success, setSuccess] = useState(false);
 
-  const setField = (key, value) => setForm((prev) => ({ ...prev, [key]: value }));
+  const setField = (key, value) =>
+    setForm((prev) => ({ ...prev, [key]: value }));
 
-  const onSubmit = (e) => {
+  const onSubmit = async (e) => {
     e.preventDefault();
     setError("");
 
@@ -33,36 +35,60 @@ function Register() {
     const password = form.password;
     const confirm = form.confirm;
     const role = form.role;
+
     if (!email || !password || !confirm || !role) {
       setError("All fields are required.");
       return;
     }
+
     if (password.length < 6) {
       setError("Password must be at least 6 characters.");
       return;
     }
+
     if (password !== confirm) {
       setError("Passwords do not match.");
       return;
     }
 
     setSubmitting(true);
+
     try {
       const users = getRegisteredUsers();
-      const exists = users.some(
-        (u) => u.email === email && normalizeRole(u.role) === normalizeRole(role)
-      );
-      if (exists) {
-        setError("User already exists for this role.");
-        return;
-      }
 
-      // Extract name from email (e.g., "john.doe" -> "John Doe")
       const nameFromEmail = email
         .split("@")[0]
         .replace(/[._]/g, " ")
         .replace(/\b\w/g, (l) => l.toUpperCase());
 
+      const username = nameFromEmail.replace(/\s+/g, "_").toLowerCase();
+
+      console.log("Calling backend API...");
+
+      // ✅ MAIN API CALL
+      const resp = await apiRegister({
+        username,
+        email,
+        password,
+        role,
+      });
+
+      console.log("API response:", resp);
+
+      const createdUser = resp;
+      // normalize role for frontend (backend returns roles set)
+      const primaryRole = createdUser.role
+        || (Array.isArray(createdUser.roles) && createdUser.roles[0])
+        || (createdUser.roles && Object.values(createdUser.roles)[0])
+        || role;
+      createdUser.role = String(primaryRole).toLowerCase();
+
+      setRegisteredUsers([...users, createdUser]);
+      setSuccess(true);
+
+    } catch (err) {
+      console.error("API ERROR:", err);
+      // fallback: persist locally so user can log in locally
       const newUser = {
         id: String(Date.now()),
         email,
@@ -91,78 +117,73 @@ function Register() {
       </section>
 
       <section className="auth-right">
-        <form className="auth-card" onSubmit={onSubmit} noValidate>
+        <form className="auth-card" onSubmit={onSubmit}>
           <h2>Create Account</h2>
-          
-          {success ? (
-            <div className="auth-success" role="alert">
-              User created successfully! You can now login.
-            </div>
-          ) : error ? (
-            <div className="auth-error" role="alert">{error}</div>
-          ) : null}
 
           {success ? (
-            <button className="auth-btn" onClick={handleSuccessRedirect}>
-              Go to Login
-            </button>
+            <>
+              <div className="auth-success">
+                User created successfully! You can now login.
+              </div>
+              <button
+                type="button"
+                className="auth-btn"
+                onClick={handleSuccessRedirect}
+              >
+                Go to Login
+              </button>
+            </>
           ) : (
             <>
+              {error && <div className="auth-error">{error}</div>}
+
               <div className="auth-field">
-                <label htmlFor="register-email">Email</label>
+                <label>Email</label>
                 <input
-                  id="register-email"
                   type="email"
                   value={form.email}
                   onChange={(e) => setField("email", e.target.value)}
-                  placeholder="you@example.com"
-                  autoComplete="email"
                 />
               </div>
 
               <div className="auth-field">
-                <label htmlFor="register-password">Password</label>
+                <label>Password</label>
                 <input
-                  id="register-password"
                   type="password"
                   value={form.password}
                   onChange={(e) => setField("password", e.target.value)}
-                  placeholder="Minimum 6 characters"
-                  autoComplete="new-password"
                 />
               </div>
 
               <div className="auth-field">
-                <label htmlFor="register-confirm">Confirm Password</label>
+                <label>Confirm Password</label>
                 <input
-                  id="register-confirm"
                   type="password"
                   value={form.confirm}
                   onChange={(e) => setField("confirm", e.target.value)}
-                  placeholder="Re-enter password"
-                  autoComplete="new-password"
                 />
               </div>
 
               <div className="auth-field">
-                <label htmlFor="register-role">Role</label>
+                <label>Role</label>
                 <select
-                  id="register-role"
                   value={form.role}
                   onChange={(e) => setField("role", e.target.value)}
                 >
                   <option value="">Select role</option>
                   {roles.map((r) => (
                     <option key={r} value={r}>
-                      {r.charAt(0).toUpperCase() + r.slice(1)}
+                      {r}
                     </option>
                   ))}
                 </select>
               </div>
 
-              
-
-              <button className="auth-btn" type="submit" disabled={submitting}>
+              <button
+                type="submit"
+                className="auth-btn"
+                disabled={submitting}
+              >
                 {submitting ? "Creating..." : "Create Account"}
               </button>
             </>
